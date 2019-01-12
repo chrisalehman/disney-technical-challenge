@@ -1,4 +1,4 @@
----
-spring:
-  application:
-    name: disney-technical-challenge
+#---
+#spring:
+#  application:
+#    name: todo
