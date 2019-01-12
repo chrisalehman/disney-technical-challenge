@@ -1,5 +1,6 @@
 buildscript {
     ext {
+        jacksonVersion = '2.9.7'
         lombokVersion = '1.18.4'
         postgresVersion = '42.2.5'
         springBootVersion = '2.1.1.RELEASE'
@@ -27,6 +28,8 @@ repositories {
 dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    compileOnly "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
     runtimeOnly "org.postgresql:postgresql:${postgresVersion}"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
