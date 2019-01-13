@@ -1,37 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -e
 
-. ~/.bash_profile
+PWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# install sdk package manager
-if [ -z "${SDKMAN_DIR}" ]; then
-    curl -s "https://get.sdkman.io" | bash
-    . "$HOME/.sdkman/bin/sdkman-init.sh"
-else
-    echo "Updating sdkman..."
-    sdk update
-fi
-sdk version
+. ${HOME}/.bash_profile
+. ${PWD}/env-setup-pkg-mgr.sh
 
-# install java ecosystem
-if [ -z `which java` ]; then
-    sdk install java
-fi
-if [ -z `which gradle` ]; then
-    sdk install gradle
-fi
+### install java ecosystem ###
+install_sdkman
+install_sdkman_package java
+install_sdkman_package gradle
 
-# install homebrew package manager
-if [ -z `which brew` ]; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-else
-    echo "Updating homebrew..."
-    brew update
-fi
-
-# install git
-if [ -z `which git` ]; then
-    brew install git
-fi
+### install homebrew packages ###
+install_homebrew
+install_brew_package git
+install_brew_cask_package docker
+install_brew_cask_package pgadmin4
+install_brew_cask_package postman
 
 # cache git creds for 24 hours
 git config credential.helper 'cache --timeout=86400'

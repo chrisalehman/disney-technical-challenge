@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # scans jars for input text - extremely helpful for finding which jars a class belongs to
 jarscan() {

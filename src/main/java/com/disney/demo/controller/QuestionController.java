@@ -31,22 +31,21 @@ public class QuestionController {
     public Question updateQuestion(@PathVariable Long questionId,
                                    @Valid @RequestBody Question questionRequest) {
         return questionRepository.findById(questionId)
-                .map(question -> {
-                    question.setTitle(questionRequest.getTitle());
-                    question.setDescription(questionRequest.getDescription());
-                    return questionRepository.save(question);
-                })
-                .orElseThrow(() -> new ResourceNotFoundException("Question not found with id " + questionId));
+            .map(question -> {
+                question.setTitle(questionRequest.getTitle());
+                question.setDescription(questionRequest.getDescription());
+                return questionRepository.save(question);
+            })
+            .orElseThrow(() -> new ResourceNotFoundException("Question not found with id " + questionId));
     }
-
 
     @DeleteMapping("/questions/{questionId}")
     public ResponseEntity<?> deleteQuestion(@PathVariable Long questionId) {
         return questionRepository.findById(questionId)
-                .map(question -> {
-                    questionRepository.delete(question);
-                    return ResponseEntity.ok().build();
-                })
-                .orElseThrow(() -> new ResourceNotFoundException("Question not found with id " + questionId));
+            .map(question -> {
+                questionRepository.delete(question);
+                return ResponseEntity.ok().build();
+            })
+            .orElseThrow(() -> new ResourceNotFoundException("Question not found with id " + questionId));
     }
 }
