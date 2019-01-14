@@ -1,8 +1,7 @@
 package com.disney.demo.controller;
 
 import com.disney.demo.model.Question;
-import com.disney.demo.model.exception.ResourceNotFoundException;
-import com.disney.demo.repository.QuestionRepository;
+import com.disney.demo.sevice.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,37 +14,41 @@ import javax.validation.Valid;
 public class QuestionController {
 
     @Autowired
-    private QuestionRepository questionRepository;
+    private QuestionService service;
 
     @GetMapping("/questions")
     public Page<Question> getQuestions(Pageable pageable) {
-        return questionRepository.findAll(pageable);
+        return service.get(pageable);
     }
 
     @PostMapping("/questions")
     public Question createQuestion(@Valid @RequestBody Question question) {
-        return questionRepository.save(question);
+        return service.create(
+            question.getTitle(),
+            question.getText());
     }
 
-    @PutMapping("/questions/{questionId}")
-    public Question updateQuestion(@PathVariable Long questionId,
-                                   @Valid @RequestBody Question questionRequest) {
-        return questionRepository.findById(questionId)
-            .map(question -> {
-                question.setTitle(questionRequest.getTitle());
-                question.setDescription(questionRequest.getDescription());
-                return questionRepository.save(question);
-            })
-            .orElseThrow(() -> new ResourceNotFoundException("Question not found with id " + questionId));
+    @PutMapping("/questions/{id}")
+    public Question updateQuestion(@PathVariable Long id,
+                                   @Valid @RequestBody Question question) {
+        return service.update(
+            id,
+            question.getTitle(),
+            question.getText());
     }
 
-    @DeleteMapping("/questions/{questionId}")
-    public ResponseEntity<?> deleteQuestion(@PathVariable Long questionId) {
-        return questionRepository.findById(questionId)
-            .map(question -> {
-                questionRepository.delete(question);
-                return ResponseEntity.ok().build();
-            })
-            .orElseThrow(() -> new ResourceNotFoundException("Question not found with id " + questionId));
+    @PatchMapping("/questions/{id}")
+    public Question patchQuestion(@PathVariable Long id,
+                                  @RequestBody Question question) {
+        return service.partialUpdate(
+                id,
+                question.getTitle(),
+                question.getText());
+    }
+
+    @DeleteMapping("/questions/{id}")
+    public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.ok().build();
     }
 }
