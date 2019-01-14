@@ -1,6 +1,8 @@
 package com.disney.demo.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -11,7 +13,6 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper=false)
 public class Question extends Auditable {
 
     public Question(String title, String text) {
