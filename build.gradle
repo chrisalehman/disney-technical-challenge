@@ -3,8 +3,9 @@ buildscript {
         jacksonVersion = '2.9.7'
         lombokVersion = '1.18.4'
         postgresVersion = '42.2.5'
-        springBootVersion = '2.1.1.RELEASE'
+        springBootVersion = '2.1.2.RELEASE'
         swaggerVersion = '2.9.2'
+        testContainersVersion = '1.7.3'
         validationApiVersion = '2.0.0.Final'
     }
     repositories {
@@ -31,6 +32,7 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
     compile "io.springfox:springfox-swagger2:${swaggerVersion}"
     compile "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+    compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     compileOnly "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
     compileOnly "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
@@ -38,5 +40,6 @@ dependencies {
     runtimeOnly "org.postgresql:postgresql:${postgresVersion}"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    testImplementation "org.testcontainers:postgresql:${testContainersVersion}"
     testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 }
