@@ -15,7 +15,7 @@ function install_sdkman() {
 }
 
 function install_sdkman_package() {
-    if [ -z "`sdk ls $1`" ]; then
+    if [ -z "`sdk ls $1 | grep '>' | grep '*'`" ]; then
         sdk install $1
     else
         sdk current $1
@@ -34,7 +34,7 @@ function install_homebrew() {
 }
 
 function install_brew_package() {
-    if [ -z "`brew ls $1 --versions`" ]; then
+    if [ -z "`brew ls $1 --versions 2> /dev/null`" ]; then
         brew install $1
     else
         brew ls $1 --versions
@@ -42,7 +42,7 @@ function install_brew_package() {
 }
 
 function install_brew_cask_package() {
-    if [ -z "`brew cask ls $1 --versions`" ]; then
+    if [ -z "`brew cask ls $1 --versions 2> /dev/null`" ]; then
         brew cask install $1
     else
         brew cask ls $1 --versions
