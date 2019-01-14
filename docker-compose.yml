@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    ports:
+      - "5432:5432"
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+      args:
+        JAR_FILE: build/libs/disney-technical-challenge-0.0.1-SNAPSHOT.jar
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.datasource.url=jdbc:postgresql://db:5432/postgres
+      - spring.datasource.username=postgres
+      - spring.datasource.password=postgres

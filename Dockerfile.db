@@ -1,0 +1,2 @@
+FROM postgres:latest
+ADD ./src/test/resources/schema.sql /docker-entrypoint-initdb.d/
