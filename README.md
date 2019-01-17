@@ -1,6 +1,6 @@
 # Pet App REST Service
 
-This document presents a complete implementation of the Disney coding challenge. The original readme has been moved to README-instructions.md.
+This document presents a complete implementation of the Disney coding challenge. The original readme has been moved to README-instructions.md. It is an example of what I can do in 24 hours. 
 
 ## Design
 
