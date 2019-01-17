@@ -1,2 +1,3 @@
 FROM postgres:latest
-ADD ./src/test/resources/schema.sql /docker-entrypoint-initdb.d/
+ADD ./src/test/resources/schema.sql /docker-entrypoint-initdb.d/ddl.sql
+ADD ./src/test/resources/data.sql /docker-entrypoint-initdb.d/dml.sql

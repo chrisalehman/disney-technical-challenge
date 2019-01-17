@@ -1,5 +1,7 @@
 clean:
 	./gradlew clean
+	docker-compose down
+	bin/db-stop.sh
 
 build:
 	./gradlew build -x test
@@ -9,12 +11,10 @@ test:
 	./gradlew test
 
 run:
-	bin/pg-start.sh
-	java -jar build/libs/disney-technical-challenge-0.0.1-SNAPSHOT.jar
+	bin/db-stop.sh
+	bin/db-start.sh
+	java -jar build/libs/disney-technical-challenge-*.jar
 
-docker-run:
-	docker-compose up --build --remove-orphans
-
-shutdown:
+docker-up:
 	docker-compose down
-	bin/pg-stop.sh
+	docker-compose up --build --remove-orphans
