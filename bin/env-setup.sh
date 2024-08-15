@@ -8,7 +8,7 @@ PWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 ### install java ecosystem ###
 install_sdkman
-install_sdkman_package java
+install_sdkman_package java 8.0.422-tem
 install_sdkman_package gradle
 
 ### install homebrew packages ###
