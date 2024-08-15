@@ -1,6 +1,6 @@
 clean:
 	./gradlew clean
-	docker-compose down
+	docker compose down
 	bin/db-stop.sh
 
 build:
@@ -16,5 +16,5 @@ run:
 	java -jar build/libs/disney-technical-challenge-*.jar
 
 docker-up:
-	docker-compose down
-	docker-compose up --build --remove-orphans
+	docker compose down
+	docker compose up --build --remove-orphans

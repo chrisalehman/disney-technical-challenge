@@ -7,7 +7,7 @@ buildscript {
         restAssuredVersion = '3.3.0'
         springBootVersion = '2.1.2.RELEASE'
         swaggerVersion = '2.9.2'
-        testContainersVersion = '1.7.3'
+        testContainersVersion = '1.20.1'
         validationApiVersion = '2.0.0.Final'
     }
     repositories {
